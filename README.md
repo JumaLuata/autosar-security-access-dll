@@ -29,7 +29,7 @@ This project provides a secure access DLL implementation for AUTOSAR systems, bu
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-repo/autosar-security-access-dll.git
+git clone https://github.com/JumaLuata/autosar-security-access-dll.git
 cd autosar-security-access-dll
 ```
 
@@ -47,10 +47,16 @@ cd autosar-security-access-dll
 Successful builds will generate:
 ```
 build/
-├── autosar_secacc_32.dll    # 32-bit DLL
-├── autosar_secacc_32.def    # 32-bit export definitions
-├── autosar_secacc_64.dll    # 64-bit DLL
-└── autosar_secacc_64.def    # 64-bit export definitions
+├── obj32/                    # 32-bit build artifacts
+│   ├── AES128.o              # 32-bit object file
+│   ├── SecAcc_Implementation.o
+│   ├── autosar_secacc_32.dll # 32-bit output DLL
+│   └── autosar_secacc_32.def # 32-bit export definitions
+└── obj64/                    # 64-bit build artifacts
+    ├── AES128.o              # 64-bit object file
+    ├── SecAcc_Implementation.o
+    ├── autosar_secacc_64.dll # 64-bit output DLL
+    └── autosar_secacc_64.def # 64-bit export definitions
 ```
 
 ## API Documentation
