@@ -48,13 +48,13 @@ Successful builds will generate:
 ```
 build/
 ├── obj32/                    # 32-bit build artifacts
-│   ├── AES128.o              # 32-bit object file
-│   ├── SecAcc_Implementation.o
+│   ├── GenerateKeyExImpl.o              # 32-bit object file
+│   ├── libautosar_secacc_32.a
 │   ├── autosar_secacc_32.dll # 32-bit output DLL
 │   └── autosar_secacc_32.def # 32-bit export definitions
 └── obj64/                    # 64-bit build artifacts
-    ├── AES128.o              # 64-bit object file
-    ├── SecAcc_Implementation.o
+    ├── GenerateKeyExImpl.o              # 64-bit object file
+    ├── libautosar_secacc_64.a
     ├── autosar_secacc_64.dll # 64-bit output DLL
     └── autosar_secacc_64.def # 64-bit export definitions
 ```
@@ -64,20 +64,15 @@ build/
 ### Key Functions
 
 ```c
-// Initialize the security module
-Std_ReturnType SecAcc_Init(const SecAcc_ConfigType* ConfigPtr);
-
 // Generate a security key
-Std_ReturnType SecAcc_GenerateKey(uint8_t securityLevel, 
-                                const uint8_t* seed, 
-                                uint8_t seedLength,
-                                uint8_t* key, 
-                                uint8_t* keyLength);
-
-// Verify a security key
-Std_ReturnType SecAcc_VerifyKey(uint8_t securityLevel,
-                               const uint8_t* key,
-                               uint8_t keyLength);
+Std_ReturnType GenerateKeyEx( const unsigned char*    iSeedArray,     /* Array for the seed [in] */
+                              unsigned int            iSeedArraySize, /* Length of the array for the seed [in] */
+                              const unsigned int      iSecurityLevel, /* Security level [in] */
+                              const char*             iVariant,       /* Name of the active variant [in] */
+                              unsigned char*          ioKeyArray,     /* Array for the key [in, out] */
+                              unsigned int            iKeyArraySize,  /* Maximum length of the array for the key [in] */
+                              unsigned int&           oSize           /* Length of the key [out] */
+);
 ```
 
 ### Security Levels
@@ -101,15 +96,18 @@ Std_ReturnType SecAcc_VerifyKey(uint8_t securityLevel,
 
 ```
 autosar-security-access-dll/
-├── include/                  # Header files
-│   ├── SecAcc_Interface.h    # Public API
-│   └── Crypto_Types.h        # Common types
-├── src/                      # Implementation
-│   ├── SecAcc_Implementation.c
-│   └── AES128.c
-├── build/                    # Build outputs
-├── SConstruct                # Build configuration
-└── README.md                 # This file
+├── include/                        # Header files
+│   └── KeyGenAlgoInterfaceEx.h     # Common types
+├── src/                            # Implementation
+│   ├── GenerateKeyExImpl.cpp
+│   └── GenerateKeyExImpl.cpp
+├── test/                           # Test dll
+│   ├── config.ini
+│   ├── security_32bit_dll_test.exe
+│   └── security_64bit_dll_test.exe
+├── build/                          # Build outputs
+├── SConstruct                      # Build configuration
+└── README.md                       # This file
 ```
 
 ## License

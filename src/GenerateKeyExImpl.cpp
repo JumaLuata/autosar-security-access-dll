@@ -433,10 +433,10 @@ KEYGENALGO_API VKeyGenResultEx GenerateKeyEx(
 int main()
 {
 
-    unsigned char  iSeedArray[16] = { 0x12,0x34,0x56,0x12,0x34,0x56 ,0x12,0x34,0x56 ,0x12,0x34,0x56 ,0x12,0x34,0x56,0x12 };/* Array for the seed [in] */
+    unsigned char   iSeedArray[16] = { 0x12,0x34,0x56,0x12,0x34,0x56 ,0x12,0x34,0x56 ,0x12,0x34,0x56 ,0x12,0x34,0x56,0x12 };/* Array for the seed [in] */
     unsigned int    iSeedArraySize = 16; /* Length of the array for the seed [in] */
     unsigned int    iSecurityLevel = 0x01; /* Security level 01 or 11 */
-    char           iVariant[4] = { 0,0,0,0 };    /* Name of the active variant [in] */
+    char            iVariant[4] = { 0,0,0,0 };    /* Name of the active variant [in] */
     unsigned char   ioKeyArray[16] = { 0,0,0,0,0,0, 0,0,0, 0,0,0, 0,0,0, 0 };    /* Array for the key [in, out] */
     unsigned int     iKeyArraySize = 16; /* Maximum length of the array for the key [in] */
     unsigned int     oSize = 0;         /* Length of the key [out] */
