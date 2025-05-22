@@ -11,7 +11,7 @@ env_64 = env.Clone()
 # Common build options
 common_defines = ['BUILD_DLL', 'SECACC_ENABLE_AES128']
 common_include = ['include']
-sources = ['src/SecAcc_Implementation.c', 'src/AES128.c']
+sources = ['src/GenerateKeyExImpl.cpp']
 
 # 32-bit configuration
 env_32.Append(CCFLAGS=['-m32', '-Wall', '-O2', '-std=c11'] + ['-D%s' % d for d in common_defines])
@@ -52,9 +52,7 @@ ensure_dir('build/obj64')
 def generate_def_file(target, source, env):
     def_content = """LIBRARY %s
 EXPORTS
-    SecAcc_Init
-    SecAcc_GenerateKey
-    SecAcc_VerifyKey
+    GenerateKeyEx
 """ % os.path.basename(str(target[0]))
     
     def_file = str(target[0]) + '.def'
